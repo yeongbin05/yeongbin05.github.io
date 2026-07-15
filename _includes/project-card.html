@@ -1,0 +1,31 @@
+{% assign post = include.post %}
+{% assign image_path = post.image.path | default: post.image %}
+
+<a class="project-card" href="{{ post.url | relative_url }}">
+  <div class="project-media">
+    <img src="{{ image_path | relative_url }}" alt="{{ post.image.alt | default: post.title | escape }}">
+  </div>
+  <div class="project-body">
+    <h2>{{ post.title }}</h2>
+    <p class="project-description">{{ post.description }}</p>
+
+    <div class="project-roles">
+      <strong>담당한 핵심 역할</strong>
+      <ul>
+        {% case post.slug %}
+          {% when 'ving-streaming' %}
+            <li>Nginx RTMP 기반 미디어 서버 구축</li>
+            <li>스트리밍 영상 S3 처리 및 CloudFront CDN 구현</li>
+          {% when 'mozzi-recommendation' %}
+            <li>DB 및 API 설계</li>
+            <li>공공 API 데이터 전처리 및 추천 알고리즘 개발</li>
+        {% endcase %}
+      </ul>
+    </div>
+
+    <ul class="tech-list" aria-label="핵심 기술">
+      {% for tag in post.tags limit: 5 %}<li>{{ tag }}</li>{% endfor %}
+    </ul>
+    <span class="project-link">프로젝트 보기 <span aria-hidden="true">→</span></span>
+  </div>
+</a>

@@ -5,7 +5,7 @@ order: 4
 ---
 
 {% assign algorithm_posts = site.posts | where_exp: 'post', 'post.categories contains "Algorithm"' %}
-<div class="tab-intro"><p class="eyebrow">Problem archive</p><h1>Algorithm</h1><p>BOJ와 LeetCode 문제 풀이를 검색하고 주제별로 탐색할 수 있습니다.</p></div>
+<div class="tab-intro"><p class="eyebrow">문제 풀이 · {{ algorithm_posts.size }}개 풀이</p><p>BOJ와 LeetCode 문제 풀이를 검색하고 주제별로 탐색할 수 있습니다.</p></div>
 
 <div class="algorithm-tools" aria-label="알고리즘 목록 필터">
   <label class="algorithm-search"><span class="visually-hidden">문제 번호 또는 제목 검색</span><i class="fas fa-search" aria-hidden="true"></i><input id="algorithm-search" type="search" placeholder="문제 번호 또는 제목 검색" autocomplete="off"></label>
@@ -17,8 +17,10 @@ order: 4
 <ul id="algorithm-list" class="algorithm-list">
   {% for post in algorithm_posts %}
     {% assign platform = post.categories[1] | downcase %}
+    {% assign display_title = post.title %}
+    {% if platform == 'boj' %}{% assign display_title = display_title | remove_first: 'BOJ ' %}{% endif %}
     <li data-title="{{ post.title | downcase | escape }}" data-platform="{{ platform }}" data-tags="{{ post.tags | join: '|' | downcase | escape }}">
-      <a href="{{ post.url | relative_url }}"><span class="platform-badge {{ platform }}">{{ post.categories[1] }}</span><span class="algorithm-title">{{ post.title }}</span><span class="algorithm-tags">{% for tag in post.tags limit: 3 %}<span>{{ tag }}</span>{% endfor %}</span><span aria-hidden="true">→</span></a>
+      <a href="{{ post.url | relative_url }}"><span class="platform-badge {{ platform }}">{{ post.categories[1] }}</span><span class="algorithm-title">{{ display_title }}</span><span class="algorithm-tags">{% for tag in post.tags limit: 3 %}<span>{{ tag }}</span>{% endfor %}</span><span aria-hidden="true">→</span></a>
     </li>
   {% endfor %}
 </ul>

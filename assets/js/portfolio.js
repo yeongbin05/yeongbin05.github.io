@@ -29,7 +29,7 @@
     page = Math.min(page, pages);
     const visible = new Set(matches.slice((page - 1) * pageSize, page * pageSize));
     items.forEach((item) => { item.hidden = !visible.has(item); });
-    status.textContent = `${matches.length}개의 문제${matches.length ? ` · ${page} / ${pages} 페이지` : ''}`;
+    status.textContent = `${matches.length}개 풀이${matches.length ? ` · ${page} / ${pages} 페이지` : ''}`;
     pagination.replaceChildren();
 
     if (pages > 1) {

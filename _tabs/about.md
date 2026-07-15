@@ -5,7 +5,7 @@ title: About
 order: 5
 ---
 
-# 안녕하세요, 백엔드 개발자 김영빈입니다.
+<p class="about-lead">안녕하세요, 백엔드 개발자 김영빈입니다.</p>
 
 SSAFY(삼성 소프트웨어 아카데미)에서 시작해 Django 기반 프로젝트를 통해 AWS, Git, Notion을 활용한 협업 경험을 쌓았습니다.
 

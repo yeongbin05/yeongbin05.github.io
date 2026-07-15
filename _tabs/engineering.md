@@ -11,9 +11,7 @@ order: 2
   {% endunless %}
 {% endfor %}
 
-<div class="tab-intro"><p class="eyebrow">Problem solving</p><h1>Engineering</h1><p>시스템을 만들며 마주한 문제와 측정, 개선 과정을 기록합니다.</p></div>
+<div class="tab-intro"><p class="eyebrow">문제 해결 기록</p><p>시스템을 만들며 마주한 문제와 측정, 개선 과정을 기록합니다.</p></div>
 {% if engineering_posts.size > 0 %}
   <div class="document-list">{% for post in engineering_posts %}<a href="{{ post.url | relative_url }}"><span>{{ post.title }}</span><span aria-hidden="true">→</span></a>{% endfor %}</div>
-{% else %}
-  <div class="empty-state"><strong>아직 공개된 Engineering 글이 없습니다.</strong><p>정리된 글부터 차근차근 추가하겠습니다.</p></div>
 {% endif %}
