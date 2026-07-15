@@ -1,7 +1,8 @@
 ---
 # the default layout is 'page'
 icon: fas fa-info-circle
-order: 4
+title: About
+order: 5
 ---
 
 # 안녕하세요, 백엔드 개발자 김영빈입니다.

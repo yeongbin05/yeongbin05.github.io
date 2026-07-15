@@ -1,0 +1,608 @@
+---
+---
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* Keep post dates in metadata while hiding them from visitor-facing views. */
+
+/* Home post cards */
+#post-list .post-meta .fa-calendar,
+#post-list .post-meta .fa-calendar + time {
+  display: none;
+}
+
+#post-list .post-meta .fa-folder-open {
+  margin-left: 0;
+}
+
+/* Published and updated rows below an individual post title */
+article > header > .post-meta > span {
+  display: none;
+}
+
+/* Category and tag post lists */
+:is(#page-category, #page-tag) li > :is(.dash, time) {
+  display: none;
+}
+
+:is(#page-category, #page-tag) li {
+  justify-content: flex-start !important;
+}
+
+/* Related post cards */
+#related-posts .card-body > time {
+  display: none;
+}
+
+#related-posts .card-body > h4 {
+  margin-top: 0 !important;
+}
+
+/* Portfolio landing and content indexes */
+
+:root {
+  --portfolio-border: var(--main-border-color);
+  --portfolio-surface: var(--card-bg);
+  --portfolio-muted: var(--text-muted-color);
+  --portfolio-accent: var(--link-color);
+}
+
+body {
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+}
+
+/* Keep archive indexes available for generated category/tag backlinks, but out of primary navigation. */
+#sidebar .nav-item:has(> a[href$="/categories/"]),
+#sidebar .nav-item:has(> a[href$="/tags/"]),
+#sidebar .nav-item:has(> a[href$="/archives/"]) {
+  display: none;
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+main:has(.portfolio-home) {
+  max-width: 1180px;
+  flex: 0 0 100%;
+}
+
+.row:has(> main > .portfolio-home) > #panel-wrapper {
+  display: none;
+}
+
+#tail-wrapper:has(+ *) {
+  max-width: 1180px;
+}
+
+.portfolio-home,
+.tab-intro,
+.project-page-grid,
+.notes-groups,
+.algorithm-tools,
+.algorithm-status,
+.algorithm-list,
+.algorithm-pagination {
+  max-width: 1160px;
+}
+
+.portfolio-home {
+  padding: 2.5rem 0 4rem;
+}
+
+.portfolio-hero {
+  padding: clamp(3rem, 8vw, 7rem) 0 clamp(4rem, 8vw, 7rem);
+  max-width: 820px;
+}
+
+.eyebrow {
+  margin: 0 0 0.7rem;
+  color: var(--portfolio-accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.portfolio-hero h1 {
+  margin: 0;
+  color: var(--heading-color);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 750;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.hero-copy {
+  max-width: 660px;
+  margin: 1.6rem 0 0;
+  color: var(--text-color);
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  line-height: 1.7;
+}
+
+.portfolio-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.portfolio-button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.68rem 1.1rem;
+  border: 1px solid var(--portfolio-border);
+  border-radius: 12px;
+  background: var(--portfolio-surface);
+  color: var(--text-color);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.portfolio-button.primary {
+  border-color: var(--heading-color);
+  background: var(--heading-color);
+  color: var(--main-bg);
+}
+
+.portfolio-button:hover {
+  border-color: var(--portfolio-accent);
+  color: var(--portfolio-accent);
+}
+
+.portfolio-button.primary:hover {
+  background: var(--portfolio-accent);
+  color: #fff;
+}
+
+.portfolio-section {
+  padding: clamp(3rem, 7vw, 5.5rem) 0;
+  border-top: 1px solid var(--portfolio-border);
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+}
+
+.section-heading h2,
+.portfolio-contact h2,
+.tab-intro h1 {
+  margin: 0;
+  color: var(--heading-color);
+  font-weight: 720;
+  letter-spacing: -0.035em;
+}
+
+.section-heading h2,
+.portfolio-contact h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.section-heading > a,
+.library-card > a {
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.project-grid,
+.library-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.project-card {
+  overflow: hidden;
+  border: 1px solid var(--portfolio-border);
+  border-radius: 18px;
+  background: var(--portfolio-surface);
+  box-shadow: 0 8px 28px rgb(0 0 0 / 3%);
+  color: var(--text-color);
+  text-decoration: none;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.project-card:hover {
+  border-color: var(--portfolio-accent);
+  color: var(--text-color);
+  transform: translateY(-2px);
+}
+
+.project-media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-bottom: 1px solid var(--portfolio-border);
+  background: var(--main-bg);
+}
+
+.project-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 250ms ease;
+}
+
+.project-card:hover .project-media img {
+  transform: scale(1.015);
+}
+
+.project-body {
+  padding: clamp(1.25rem, 3vw, 1.8rem);
+}
+
+.project-body h2,
+.project-body h3 {
+  margin: 0 0 0.65rem;
+  color: var(--heading-color);
+  font-size: 1.35rem;
+}
+
+.project-body p {
+  min-height: 3.2em;
+  margin-bottom: 1.1rem;
+  color: var(--portfolio-muted);
+  line-height: 1.6;
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tech-list li,
+.algorithm-tags span {
+  padding: 0.26rem 0.55rem;
+  border: 1px solid var(--portfolio-border);
+  border-radius: 999px;
+  color: var(--portfolio-muted);
+  font-size: 0.75rem;
+}
+
+.document-list,
+.empty-state,
+.library-card,
+.portfolio-contact,
+.notes-group,
+.algorithm-tools {
+  border: 1px solid var(--portfolio-border);
+  border-radius: 16px;
+  background: var(--portfolio-surface);
+}
+
+.document-list {
+  overflow: hidden;
+}
+
+.document-list a,
+.notes-group li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--portfolio-border);
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.document-list a:last-child,
+.notes-group li:last-child a {
+  border-bottom: 0;
+}
+
+.document-list a:hover,
+.notes-group li a:hover {
+  background: var(--button-bg);
+  color: var(--portfolio-accent);
+}
+
+.empty-state {
+  padding: 2rem;
+  color: var(--portfolio-muted);
+}
+
+.empty-state strong {
+  color: var(--heading-color);
+  font-size: 1.05rem;
+}
+
+.empty-state p {
+  margin: 0.5rem 0 0;
+}
+
+.library-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem 1rem;
+  padding: clamp(1.4rem, 3vw, 2rem);
+}
+
+.library-icon {
+  grid-column: 1 / -1;
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  margin-bottom: 0.4rem;
+  border-radius: 12px;
+  background: var(--button-bg);
+  color: var(--portfolio-accent);
+}
+
+.library-card h3,
+.library-card p {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.library-card p {
+  min-height: 3em;
+  color: var(--portfolio-muted);
+}
+
+.library-card strong {
+  color: var(--heading-color);
+}
+
+.portfolio-contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+  padding: clamp(1.6rem, 5vw, 3rem);
+}
+
+.portfolio-contact p:not(.eyebrow) {
+  margin: 0.6rem 0 0;
+  color: var(--portfolio-muted);
+}
+
+.portfolio-contact .portfolio-actions {
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+.tab-intro {
+  padding: 2rem 0 2.5rem;
+}
+
+.tab-intro h1 {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+}
+
+.tab-intro > p:last-child {
+  max-width: 680px;
+  margin: 1rem 0 0;
+  color: var(--portfolio-muted);
+  font-size: 1.08rem;
+}
+
+.notes-groups {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.notes-group {
+  overflow: hidden;
+}
+
+.notes-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.15rem 1.25rem;
+  border-bottom: 1px solid var(--portfolio-border);
+}
+
+.notes-heading h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.notes-heading span,
+.algorithm-status {
+  color: var(--portfolio-muted);
+  font-size: 0.85rem;
+}
+
+.notes-group ul,
+.algorithm-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.algorithm-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+.algorithm-search {
+  display: flex;
+  flex: 1 1 320px;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 44px;
+  padding: 0 0.8rem;
+  border: 1px solid var(--portfolio-border);
+  border-radius: 12px;
+  background: var(--main-bg);
+}
+
+.algorithm-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text-color);
+}
+
+.filter-row {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.filter-button,
+.algorithm-pagination button {
+  min-height: 40px;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--portfolio-border);
+  border-radius: 10px;
+  background: var(--main-bg);
+  color: var(--text-color);
+}
+
+.filter-button.active,
+.algorithm-pagination button.active {
+  border-color: var(--portfolio-accent);
+  background: var(--portfolio-accent);
+  color: #fff;
+}
+
+.tag-select {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--portfolio-muted);
+}
+
+.tag-select select {
+  min-height: 40px;
+  border: 1px solid var(--portfolio-border);
+  border-radius: 10px;
+  background: var(--main-bg);
+  color: var(--text-color);
+}
+
+.algorithm-status {
+  margin: 1rem 0 0.55rem;
+}
+
+.algorithm-list {
+  overflow: hidden;
+  border-top: 1px solid var(--portfolio-border);
+}
+
+.algorithm-list li {
+  border-bottom: 1px solid var(--portfolio-border);
+}
+
+.algorithm-list li[hidden] {
+  display: none;
+}
+
+.algorithm-list a {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr) auto 1rem;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 58px;
+  padding: 0.65rem 0.25rem;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.algorithm-list a:hover {
+  color: var(--portfolio-accent);
+}
+
+.platform-badge {
+  width: fit-content;
+  padding: 0.25rem 0.55rem;
+  border-radius: 8px;
+  background: var(--button-bg);
+  color: var(--portfolio-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.algorithm-tags {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.algorithm-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  padding-top: 1.5rem;
+}
+
+:is(a, button, input, select):focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--portfolio-accent) 55%, transparent);
+  outline-offset: 3px;
+}
+
+/* Search result dates are retained in the index but not shown. */
+#search-results .post-meta,
+#search-results time {
+  display: none !important;
+}
+
+@media (max-width: 767.98px) {
+  .portfolio-home {
+    padding-top: 0.5rem;
+  }
+
+  .project-grid,
+  .library-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading,
+  .portfolio-contact {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .portfolio-contact .portfolio-actions {
+    width: 100%;
+  }
+
+  .portfolio-contact .portfolio-button {
+    flex: 1;
+  }
+
+  .algorithm-list a {
+    grid-template-columns: 74px minmax(0, 1fr) 1rem;
+  }
+
+  .algorithm-tags {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .project-media img {
+    transition: none;
+  }
+}
