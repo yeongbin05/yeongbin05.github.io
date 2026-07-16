@@ -228,6 +228,15 @@ main:has(.portfolio-home) {
   transform: translateY(-2px);
 }
 
+.project-card.featured {
+  border-color: color-mix(in srgb, var(--portfolio-accent) 32%, var(--portfolio-border));
+  box-shadow: 0 10px 32px rgb(0 0 0 / 4%);
+}
+
+.project-card.previous {
+  box-shadow: none;
+}
+
 .project-media {
   aspect-ratio: 16 / 10;
   overflow: hidden;
@@ -240,6 +249,19 @@ main:has(.portfolio-home) {
   height: 100%;
   object-fit: cover;
   transition: transform 250ms ease;
+}
+
+.project-placeholder {
+  display: grid;
+  place-items: center;
+  background: var(--button-bg);
+}
+
+.project-placeholder span {
+  color: var(--heading-color);
+  font-size: clamp(1.55rem, 4vw, 2.3rem);
+  font-weight: 750;
+  letter-spacing: -0.04em;
 }
 
 .project-card:hover .project-media img {
@@ -302,6 +324,31 @@ main:has(.portfolio-home) {
   color: var(--portfolio-accent);
   font-size: 0.9rem;
   font-weight: 700;
+}
+
+.project-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: -0.25rem 0 1.15rem;
+  padding: 0;
+  list-style: none;
+}
+
+.project-highlights li {
+  padding: 0.26rem 0.55rem;
+  border-radius: 7px;
+  background: var(--button-bg);
+  color: var(--portfolio-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.previous-projects-link {
+  display: inline-flex;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+  font-weight: 650;
 }
 
 .tech-list li,
@@ -427,6 +474,35 @@ main:has(.portfolio-home) {
   margin: 1rem 0 0;
   color: var(--portfolio-muted);
   font-size: 1.08rem;
+}
+
+.projects-section + .projects-section {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--portfolio-border);
+}
+
+.projects-section > h2,
+.projects-section-heading h2 {
+  margin: 0 0 1.25rem;
+  color: var(--heading-color);
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+}
+
+.projects-section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.projects-section-heading span {
+  color: var(--portfolio-muted);
+  font-size: 0.85rem;
+}
+
+.previous-projects .project-card {
+  border-radius: 14px;
 }
 
 .about-lead {

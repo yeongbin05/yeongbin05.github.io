@@ -2,7 +2,8 @@
 layout: default
 ---
 
-{% assign project_posts = site.posts | where_exp: 'post', 'post.categories contains "Projects"' %}
+{% assign stockq_post = site.posts | where: 'slug', 'stockq' | first %}
+{% assign xbench_post = site.posts | where: 'slug', 'django-xbench' | first %}
 {% assign cs_posts = site.posts | where_exp: 'post', 'post.categories contains "CS"' %}
 {% assign algorithm_posts = site.posts | where_exp: 'post', 'post.categories contains "Algorithm"' %}
 {% assign engineering_posts = '' | split: '' %}
@@ -29,10 +30,10 @@ layout: default
       <a href="{{ '/projects/' | relative_url }}">전체 보기 <span aria-hidden="true">→</span></a>
     </div>
     <div class="project-grid">
-      {% for post in project_posts limit: 2 %}
-        {% include project-card.html post=post %}
-      {% endfor %}
+      {% if stockq_post %}{% include project-card.html post=stockq_post featured=true %}{% endif %}
+      {% if xbench_post %}{% include project-card.html post=xbench_post featured=true %}{% endif %}
     </div>
+    <a class="previous-projects-link" href="{{ '/projects/#previous-projects' | relative_url }}">이전 프로젝트 보기 <span aria-hidden="true">→</span></a>
   </section>
 
   {% if engineering_posts.size > 0 %}

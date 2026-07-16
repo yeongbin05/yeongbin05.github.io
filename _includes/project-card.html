@@ -1,18 +1,36 @@
 {% assign post = include.post %}
 {% assign image_path = post.image.path | default: post.image %}
 
-<a class="project-card" href="{{ post.url | relative_url }}">
+<a class="project-card{% if include.featured %} featured{% else %} previous{% endif %}" href="{{ post.url | relative_url }}">
+  {% if image_path %}
   <div class="project-media">
     <img src="{{ image_path | relative_url }}" alt="{{ post.image.alt | default: post.title | escape }}">
   </div>
+  {% else %}
+    <div class="project-media project-placeholder" aria-hidden="true"><span>{{ post.title }}</span></div>
+  {% endif %}
   <div class="project-body">
     <h2>{{ post.title }}</h2>
-    <p class="project-description">{{ post.description }}</p>
+    {% case post.slug %}
+      {% when 'stockq' %}<p class="project-description">AI 주식 뉴스 요약 비동기 백엔드</p>
+      {% when 'django-xbench' %}<p class="project-description">Django 요청 시간 분석 오픈소스 라이브러리</p>
+      {% else %}<p class="project-description">{{ post.description }}</p>
+    {% endcase %}
+
+    {% if post.slug == 'django-xbench' %}
+      <ul class="project-highlights" aria-label="프로젝트 성과"><li>Open Source</li><li>30+ GitHub Stars</li><li>PyPI Published</li></ul>
+    {% endif %}
 
     <div class="project-roles">
       <strong>담당한 핵심 역할</strong>
       <ul>
         {% case post.slug %}
+          {% when 'stockq' %}
+            <li>비동기 요약 파이프라인 및 작업 상태 관리 설계</li>
+            <li>DB·Serializer 병목 분석과 API 성능 개선</li>
+          {% when 'django-xbench' %}
+            <li>total/db/app 구간 측정 Middleware 구현</li>
+            <li>Server-Timing과 slow endpoint aggregation 제공</li>
           {% when 'ving-streaming' %}
             <li>Nginx RTMP 기반 미디어 서버 구축</li>
             <li>스트리밍 영상 S3 처리 및 CloudFront CDN 구현</li>
@@ -24,7 +42,11 @@
     </div>
 
     <ul class="tech-list" aria-label="핵심 기술">
-      {% for tag in post.tags limit: 5 %}<li>{{ tag }}</li>{% endfor %}
+      {% case post.slug %}
+        {% when 'stockq' %}<li>Django</li><li>PostgreSQL</li><li>Celery</li><li>Redis</li><li>Prometheus</li>
+        {% when 'django-xbench' %}<li>Python</li><li>Django</li><li>Middleware</li><li>Server-Timing</li><li>PyPI</li>
+        {% else %}{% for tag in post.tags limit: 5 %}<li>{{ tag }}</li>{% endfor %}
+      {% endcase %}
     </ul>
     <span class="project-link">프로젝트 보기 <span aria-hidden="true">→</span></span>
   </div>
